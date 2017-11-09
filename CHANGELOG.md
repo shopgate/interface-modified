@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-## 2.9.40
+## 2.9.40 - 2017-11-9
 ### Changed
 - migrated Shopgate integration for modified eCommerce to GitHub
 
