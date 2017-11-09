@@ -216,5 +216,3 @@ function shopgate_php_mail(
 
     return true;
 }
-
-?>

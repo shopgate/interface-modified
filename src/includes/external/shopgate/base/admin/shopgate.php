@@ -438,8 +438,8 @@ if (defined('PROJECT_MAJOR_VERSION')) {
                     <option value="<?php echo $sgLanguage['code']; ?>"<?php if ($sgLanguage['code']
                         == $sg_language
                     ) {
-                        echo ' selected="selected"';
-                    } ?>>
+                     echo ' selected="selected"';
+                } ?>>
                         - <?php echo $sgLanguage['name']; ?>
                     </option>
                 <?php endforeach; ?>
@@ -450,14 +450,14 @@ if (defined('PROJECT_MAJOR_VERSION')) {
             <input type="checkbox" name="sg_global_switch" value="1"
                    onclick="sgToggleSettings(this)"
                    id="sg_global_switch" <?php if (!empty($sgUseGlobalConfig)) {
-                echo 'checked="checked"';
-            } ?> />
+                      echo 'checked="checked"';
+                } ?> />
             <label for="sg_global_switch"><?php echo SHOPGATE_CONFIG_USE_GLOBAL_CONFIG; ?></label>
         <?php endif; ?>
     <?php endif; ?>
     <table id="sg_settings" <?php if (!empty($sgUseGlobalConfig)) {
-        echo 'style="display: none;';
-    } ?>>
+                    echo 'style="display: none;';
+                } ?>>
         <tr>
             <td colspan="2">&nbsp;</td>
         </tr>
@@ -1307,8 +1307,8 @@ if (defined('PROJECT_MAJOR_VERSION')) {
                                         <option <?php if ($shopgateConfig['encoding']
                                             == $encoding
                                         ) {
-                                            echo 'selected="selected"';
-                                        } ?>>
+                                echo 'selected="selected"';
+                            } ?>>
                                             <?php echo $encoding; ?>
                                         </option>
                                     <?php endforeach; ?>

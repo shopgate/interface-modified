@@ -1289,9 +1289,7 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
             && !empty($product["products_vpe_name"])
             && $product["products_vpe_value"] != 0.0000
         ) {
-
             if ($product["products_vpe_status"] == 1) {
-
                 $factor = 1;
                 switch (strtolower($product["products_vpe_name"])) {
                     case "ml":
