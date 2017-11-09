@@ -454,3 +454,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - remote cron job for synchronization of order status at Shopgate
 
 [Unreleased]: https://github.com/shopgate/cart-integration-modified/compare/2.9.40...HEAD
+[2.9.40]: https://github.com/shopgate/cart-integration-modified/compare/2.9.40...2.9.40
