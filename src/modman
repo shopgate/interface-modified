@@ -1,0 +1,6 @@
+admin/shopgate.php                          admin/shopgate.php
+includes/external/shopgate/                 includes/external/shopgate/
+lang/english/modules/payment/shopgate.php   lang/english/modules/payment/shopgate.php
+lang/german/modules/payment/shopgate.php    lang/german/modules/payment/shopgate.php
+shopgate.php                                shopgate.php
+missing_constants.php                       missing_constants.php
