@@ -1404,7 +1404,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     $paymentInfosUtf8
                 )
             ) {
-
                 $dbPaymentInfo = $this->jsonDecode(
                     $dbOrder['payment_infos'], true
                 );
@@ -1614,7 +1613,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
 
     protected function createReviewsCsv()
     {
-
         $reviewModel = new ShopgateReviewModel();
         $reviewModel->setLanguageId($this->languageId);
 
@@ -1868,7 +1866,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $validCouponFound = false;
         /** @var ShopgateExternalCoupon $cp */
         foreach ($reverse as $cp) {
-
             if ($cp->getIsValid()) {
                 if (!$validCouponFound) {
                     $validCouponFound = true;
@@ -2464,7 +2461,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 )
             ) {
                 foreach ($shippingModule["methods"] as $method) {
-
                     $tmp_shipping = $sgShippingMethod;
                     $cost         = $method["cost"];
 
@@ -2498,7 +2494,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
 
     public function getCustomerById($customerId)
     {
-
         $qry = "SELECT"
             . " customers_status"
             . " FROM " . TABLE_CUSTOMERS
@@ -3813,7 +3808,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                 }
             } else {
-
                 $this->log('attributes?', ShopgateLogger::LOGTYPE_DEBUG);
 
                 for ($i = 1; $i <= 10; $i++) {
@@ -3904,7 +3898,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     //$result = $qry = xtc_db_query($qry);
                     //$download = xtc_db_fetch_array($qry);
                     if (DOWNLOAD_ENABLED == 'true') {
-
                         $query
                             =
                             " SELECT pad.products_attributes_maxdays,    pad.products_attributes_maxcount,    pad.products_attributes_filename  FROM "
@@ -4319,7 +4312,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
 
         $shippingTaxRate = $this->getOrderShippingTaxRate($order);
         if (!empty($shippingTaxRate)) {
-
             $shippingTaxRate = intval($shippingTaxRate * 100) / 100;
 
             if (!isset($taxes[$shippingTaxRate])) {
@@ -4628,7 +4620,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 //BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
                 unset($_SESSION['paypal_link']);
                 if ($order->info['payment_method'] == 'paypal_ipn') {
-
                     $paypal_link     = array();
                     $payment_modules = new paypal_ipn;
                     $payment_modules->create_paypal_link();
@@ -4956,7 +4947,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 //BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
                 unset($_SESSION['paypal_link']);
                 if ($order->info['payment_method'] == 'paypal_ipn') {
-
                     //BOF - web28 - 2010-06-11 - Send Order  by Admin Paypal IPN
                     if (isset($send_by_admin)) { //DokuMan - 2010-09-18 - Undefined variable: send_by_admin
                         require(DIR_FS_CATALOG_MODULES
@@ -5031,7 +5021,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         $order->delivery['country_iso_2']
                     )
                     );
-
                     //absolute image path
                     $smarty->assign(
                         'img_path', HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES
@@ -5079,7 +5068,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     '{$firstname}', $order->customer['firstname'],
                     $order_subject
                 );
-
                 // send mail to admin
                 if (!shopgate_php_mail(
                     EMAIL_BILLING_ADDRESS,
@@ -5148,7 +5136,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                      last_modified = now()
                WHERE orders_id = '" . xtc_db_input($insert_id) . "'"
                     );
-
                     //web28 - 2011-08-26 - Fix order status history
                     xtc_db_query(
                         "INSERT INTO " . TABLE_ORDERS_STATUS_HISTORY . "
@@ -5160,7 +5147,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                           customer_notified = '" . $customer_notified . "',
                           comments = '" . COMMENT_SEND_ORDER_BY_ADMIN . "'"
                     );
-
                     $messageStack->add_session(SUCCESS_ORDER_SEND, 'success');
 
                     if (isset($_GET['site'])
@@ -5256,7 +5242,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             ShopgateMerchantApiException::ORDER_ALREADY_COMPLETED,
             ShopgateMerchantApiException::ORDER_SHIPPING_STATUS_ALREADY_COMPLETED
         );
-
         try {
             $merchantApi->setOrderShippingCompleted($shopgateOrderNumber);
 
@@ -5267,7 +5252,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 "customer_notified" => 1,
                 "comments"          => "[Shopgate] Bestellung wurde bei Shopgate als versendet markiert",
             );
-
             xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY, $statusArr);
 
             $success = true;
@@ -5275,7 +5259,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $response = $this->stringFromUtf8(
                 $e->getAdditionalInformation(), $config->getEncoding()
             );
-
             $statusArr = array(
                 "orders_id"         => $orderId,
                 "orders_status_id"  => $config->getOrderStatusShipped(),
@@ -5289,7 +5272,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $response = $this->stringFromUtf8(
                 $e->getMessage(), $config->getEncoding()
             );
-
             $statusArr = array(
                 "orders_id"         => $orderId,
                 "orders_status_id"  => $config->getOrderStatusShipped(),
@@ -5297,7 +5279,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 "customer_notified" => 0,
                 "comments"          => "[Shopgate] Ein Fehler ist bei Shopgate aufgetreten ({$e->getCode()}): {$response}",
             );
-
             xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY, $statusArr);
 
             $success = (in_array($e->getCode(), $ignoreCodes)) ? true : false;
@@ -5305,7 +5286,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $response = $this->stringFromUtf8(
                 $e->getMessage(), $config->getEncoding()
             );
-
             $statusArr = array(
                 "orders_id"         => $orderId,
                 "orders_status_id"  => $config->getOrderStatusShipped(),
@@ -5313,7 +5293,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 "customer_notified" => 0,
                 "comments"          => "[Shopgate] Ein unbekannter Fehler ist aufgetreten ({$e->getCode()}): {$response}",
             );
-
             xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY, $statusArr);
         }
 
@@ -5606,7 +5585,6 @@ class ShopgateXtcMapper
         preg_match(
             '/^([A-Z]{2})\-([A-Z]{2})$/', $shopgateStateCode, $splitCodes
         );
-
         if (empty($splitCodes) || empty($splitCodes[1])
             || empty($splitCodes[2])
         ) {
