@@ -1216,8 +1216,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             "orders_id"                        => $dbOrderId,
             "shopgate_order_number"            => $order->getOrderNumber(),
             "is_paid"                          => $order->getIsPaid(),
-            "is_shipping_blocked"              => $order->getIsShippingBlocked(
-            ),
+            "is_shipping_blocked"              => $order->getIsShippingBlocked(),
             "payment_infos"                    => $this->jsonEncode(
                 $paymentInfoUtf8
             ),
@@ -1339,7 +1338,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         }
 
         if ($order->getUpdatePayment() == 1) {
-
             if (!is_null($statusShoppingSystemOrderIsPaid)
                 && $order->getIsPaid() == $statusShoppingSystemOrderIsPaid
                 && !is_null($dbOrder['payment_infos'])
@@ -1535,11 +1533,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 TABLE_SHOPGATE_ORDERS, $ordersShopgateOrder, "update",
                 "shopgate_order_id = {$dbOrder['shopgate_order_id']}"
             );
-
         }
 
         if ($order->getUpdateShipping() == 1) {
-
             if (!is_null($statusShoppingSystemOrderIsShippingBlocked)
                 && $order->getIsShippingBlocked()
                 == $statusShoppingSystemOrderIsShippingBlocked
@@ -1548,8 +1544,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             } else {
                 if ($status != $this->config->getOrderStatusShipped()) {
                     if ($order->getIsShippingBlocked() == 1) {
-                        $status = $this->config->getOrderStatusShippingBlocked(
-                        );
+                        $status = $this->config->getOrderStatusShippingBlocked();
                     } else {
                         $status = $this->config->getOrderStatusOpen();
                     }
@@ -1575,8 +1570,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 xtc_db_perform(TABLE_ORDERS_STATUS_HISTORY, $orderStatus);
 
                 $ordersShopgateOrder = array(
-                    "is_shipping_blocked" => (int)$order->getIsShippingBlocked(
-                    ),
+                    "is_shipping_blocked" => (int)$order->getIsShippingBlocked(),
                     "modified"            => "now()",
                 );
                 xtc_db_perform(
@@ -1672,7 +1666,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $customerTaxClass = array(
             'id'         => "1",
             'key'        => 'default',
-            'is_default' => "1");
+            'is_default' => "1"
+        );
         $taxRates         = array();
         $taxRules         = array();
         foreach ($oscTaxRates as $oscTaxRate) {
@@ -1990,10 +1985,10 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         return $result;
     }
 
-    protected function createCategories($limit = null, $offset = null,
+    protected function createCategories(
+        $limit = null, $offset = null,
         array $uids = array()
     ) {
-
         $model = new ShopgateCategoryXmlModel();
         $model->setLanguageId($this->languageId);
 
@@ -2008,8 +2003,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $row                  = $this->buildDefaultCategoryRow();
             $row['parent_id']     = '';
             $row['category_number']
-                                  = $this->config->getExportNewProductsCategoryId(
-            );
+                                  = $this->config->getExportNewProductsCategoryId();
             $row['category_name'] = 'Neue Produkte';
             $row["is_active"]     = 1;
             $row['url_deeplink']  = xtc_href_link('products_new.php');
@@ -2036,7 +2030,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         // TODO: Implement createMediaCsv() method.
     }
 
-    protected function createItems($limit = null, $offset = null,
+    protected function createItems(
+        $limit = null, $offset = null,
         array $uids = array()
     ) {
         $customerModel = new ShopgateCustomerModel(
@@ -2096,7 +2091,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         // TODO: Implement syncFavouriteList() method.
     }
 
-    protected function createReviews($limit = null, $offset = null,
+    protected function createReviews(
+        $limit = null, $offset = null,
         array $uids = array()
     ) {
         $model = new ShopgateReviewXmlModel($this->config);
@@ -2684,7 +2680,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      *
      * @throws ShopgateMerchantApiException
      */
-    protected function sendOrderCancellation($shopgateOrderNumber,
+    protected function sendOrderCancellation(
+        $shopgateOrderNumber,
         ShopgateMerchantApiInterface $merchantApi
     ) {
         try {
@@ -2716,7 +2713,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $parentId = 0, $maxOrder = 0, $type = "csv", $limit = null,
         $offset = null, array $uids = array()
     ) {
-
         $this->log(
             "Start buldiding Categories tree: parent_id = " . $parentId . "...",
             ShopgateLogger::LOGTYPE_DEBUG
@@ -2808,10 +2804,10 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      *
      * @return array
      */
-    private function getVariations(ShopgateItemModel $itemModel, $productId,
+    private function getVariations(
+        ShopgateItemModel $itemModel, $productId,
         $tax_rate
     ) {
-
         $this->log(
             "execute _getVariations() ...", ShopgateLogger::LOGTYPE_DEBUG
         );
@@ -2949,7 +2945,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      * @param int   $index
      * @param array $baseVar
      */
-    private function buildAttributes(&$sg_prod_var, $variations, $index = 0,
+    private function buildAttributes(
+        &$sg_prod_var, $variations, $index = 0,
         $baseVar = array()
     ) {
         $this->log(
@@ -3219,12 +3216,12 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         while ($specialOffer = xtc_db_fetch_array($_specialOffers)) {
             $specialOffers[] = implode(
                 "=>", array(
-                    "qty"            => $specialOffer["quantity"],
-                    "personal_offer" => round(
-                        $specialOffer["personal_offer"] * (1 + ($tax_rate
-                                / 100)), 2
-                    ),
-                )
+                        "qty"            => $specialOffer["quantity"],
+                        "personal_offer" => round(
+                            $specialOffer["personal_offer"] * (1 + ($tax_rate
+                                    / 100)), 2
+                        ),
+                    )
             );
         }
 
@@ -3386,7 +3383,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      * @param               $dbOrderId
      * @param               $currentOrderStatus
      */
-    private function insertStatusHistory(ShopgateOrder $order, $dbOrderId,
+    private function insertStatusHistory(
+        ShopgateOrder $order, $dbOrderId,
         &$currentOrderStatus
     ) {
         ///////////////////////////////////////////////////////////////////////
@@ -3410,8 +3408,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $comment .= "\nHinweis: Der Versand der Bestellung ist bei Shopgate nicht blockiert!";
         } else {
             $comment            .= "\nHinweis: Der Versand der Bestellung ist bei Shopgate blockiert!";
-            $currentOrderStatus = $this->config->getOrderStatusShippingBlocked(
-            );
+            $currentOrderStatus = $this->config->getOrderStatusShippingBlocked();
         }
         if ($order->getIsCustomerInvoiceBlocked()) {
             $comment .= "\nHinweis: Für diese Bestellung darf keine Rechnung versendet werden!";
@@ -3433,7 +3430,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      * @param               $dbOrderId
      * @param               $currentOrderStatus
      */
-    private function setOrderPayment(ShopgateOrder $order, $dbOrderId,
+    private function setOrderPayment(
+        ShopgateOrder $order, $dbOrderId,
         &$currentOrderStatus
     ) {
         $payment      = $order->getPaymentMethod();
@@ -3623,7 +3621,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      *
      * @return mixed History-Array or String
      */
-    private function createPaymentInfos($paymentInfos, $dbOrderId,
+    private function createPaymentInfos(
+        $paymentInfos, $dbOrderId,
         $currentOrderStatus, $asArray = true
     ) {
         $paymentInformation = '';
@@ -3663,7 +3662,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         ///////////////////////////////////////////////////////////////////////
         $errors = '';
         foreach ($order->getItems() as $orderItem) {
-
             $orderInfo = stripslashes($orderItem->getInternalOrderInfo());
             $orderInfo = $this->jsonDecode($orderInfo, true);
 
@@ -3908,7 +3906,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     if (DOWNLOAD_ENABLED == 'true') {
 
                         $query
-                            = " SELECT pad.products_attributes_maxdays,    pad.products_attributes_maxcount,    pad.products_attributes_filename  FROM "
+                            =
+                            " SELECT pad.products_attributes_maxdays,    pad.products_attributes_maxcount,    pad.products_attributes_filename  FROM "
                             . TABLE_PRODUCTS_ATTRIBUTES . " pa "
                             . " LEFT JOIN " . TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD
                             . " pad ON pa.products_attributes_id=pad.products_attributes_id "
@@ -4106,11 +4105,15 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 if (!empty($attributeSQLQueryParts)) {
                     // Attribute stock is ALWAYS reduced (no matter what is set as STOCK_LIMITED or the other constants)!
                     $attributeSQLConditionSnippet = '(' . str_replace(
-                            array('OPTIONS_ID', 'OPTIONS_VALUES_ID',
-                                  'ATTRIBUTES_ID'),
-                            array('`pa`.`options_id`',
-                                  '`pa`.`options_values_id`',
-                                  '`pa`.`products_attributes_id`'),
+                            array(
+                                'OPTIONS_ID', 'OPTIONS_VALUES_ID',
+                                'ATTRIBUTES_ID'
+                            ),
+                            array(
+                                '`pa`.`options_id`',
+                                '`pa`.`options_values_id`',
+                                '`pa`.`products_attributes_id`'
+                            ),
                             implode(') OR (', $attributeSQLQueryParts)
                         ) . ')';
 
@@ -4167,7 +4170,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      * @param int                 $dbOrderId
      * @param ShopgateCouponModel $couponModel
      */
-    private function insertOrderTotal(ShopgateOrder $order, $dbOrderId,
+    private function insertOrderTotal(
+        ShopgateOrder $order, $dbOrderId,
         ShopgateCouponModel $couponModel
     ) {
         ///////////////////////////////////////////////////////////////////////
@@ -4300,7 +4304,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $taxes = array();
 
         foreach ($order->getItems() as $orderItem) {
-
             $tax = $orderItem->getTaxPercent();
 
             $tax       = intval($tax * 100) / 100;
@@ -4421,7 +4424,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      *
      * @return float|int
      */
-    private function getOrderShippingAmountWithoutTax(ShopgateOrder $order,
+    private function getOrderShippingAmountWithoutTax(
+        ShopgateOrder $order,
         $shippingTaxRate = 0
     ) {
         $shippingAmountWithoutTax = $order->getAmountShipping();
@@ -4479,7 +4483,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
      * @param               $dbOrderId
      * @param ShopgateOrder $shopgateOrder
      */
-    private function pushOrderToDreamRobot($dbOrderId,
+    private function pushOrderToDreamRobot(
+        $dbOrderId,
         ShopgateOrder $shopgateOrder
     ) {
         if (!$shopgateOrder->getIsShippingBlocked()
@@ -4587,7 +4592,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 );
                 $smarty->assign(
                     'logo_path', HTTP_SERVER . DIR_WS_CATALOG . 'templates/'
-                    . CURRENT_TEMPLATE . '/img/'
+                               . CURRENT_TEMPLATE . '/img/'
                 );
                 $smarty->assign('oID', $insert_id);
                 if ($order->info['payment_method'] != ''
@@ -4630,10 +4635,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     $smarty->assign('PAYMENT_INFO_HTML', $paypal_link['html']);
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', MODULE_PAYMENT_PAYPAL_IPN_TXT_EMAIL
-                        . $paypal_link['text']
+                                          . $paypal_link['text']
                     );
                     $_SESSION['paypal_link'] = $paypal_link['checkout'];
-
                 }
                 //EOF  - web28 - 2010-03-27 PayPal Bezahl-Link
 
@@ -4646,9 +4650,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', str_replace(
-                            "<br />", "\n",
-                            MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION
-                        )
+                                              "<br />", "\n",
+                                              MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION
+                                          )
                     );
                 }
 
@@ -4660,9 +4664,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', str_replace(
-                            "<br />", "\n",
-                            MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION
-                        )
+                                              "<br />", "\n",
+                                              MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION
+                                          )
                     );
                 }
                 // -------Trustedshops Kundenbewertung -----------
@@ -4786,7 +4790,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             if ($_SESSION['customer_id'] == $order_check['customers_id']
                 || $send_by_admin
             ) {
-
                 //EOF - web28 - 2010-03-20 - Send Order by Admin
                 $order = new order($insert_id);
                 if (empty($order->info['language'])) {
@@ -4877,7 +4880,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 );
                 $smarty->assign(
                     'logo_path', HTTP_SERVER . DIR_WS_CATALOG . 'templates/'
-                    . CURRENT_TEMPLATE . '/img/'
+                               . CURRENT_TEMPLATE . '/img/'
                 );
                 //$smarty->assign('oID', $insert_id);
                 $smarty->assign(
@@ -4970,7 +4973,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     $smarty->assign('PAYMENT_INFO_HTML', $paypal_link['html']);
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', MODULE_PAYMENT_PAYPAL_IPN_TXT_EMAIL
-                        . $paypal_link['text']
+                                          . $paypal_link['text']
                     );
                     $_SESSION['paypal_link'] = $paypal_link['checkout'];
 
@@ -4985,9 +4988,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', str_replace(
-                            "<br />", "\n",
-                            MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION
-                        )
+                                              "<br />", "\n",
+                                              MODULE_PAYMENT_EUTRANSFER_TEXT_DESCRIPTION
+                                          )
                     );
                 }
 
@@ -4999,9 +5002,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', str_replace(
-                            "<br />", "\n",
-                            MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION
-                        )
+                                              "<br />", "\n",
+                                              MODULE_PAYMENT_MONEYORDER_TEXT_DESCRIPTION
+                                          )
                     );
                 }
 
@@ -5012,8 +5015,8 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     );
                     $smarty->assign(
                         'PAYMENT_INFO_TXT', str_replace(
-                            "<br />", "\n", MODULE_PAYMENT_COD_TEXT_INFO
-                        )
+                                              "<br />", "\n", MODULE_PAYMENT_COD_TEXT_INFO
+                                          )
                     );
                 }
 
@@ -5032,9 +5035,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     //absolute image path
                     $smarty->assign(
                         'img_path', HTTP_SERVER . DIR_WS_CATALOG . DIR_WS_IMAGES
-                        . 'product_images/' . (defined(
-                            'SHOW_IMAGES_IN_EMAIL_DIR'
-                        ) ? SHOW_IMAGES_IN_EMAIL_DIR : 'thumbnail') . '_images/'
+                                  . 'product_images/' . (defined(
+                                      'SHOW_IMAGES_IN_EMAIL_DIR'
+                                  ) ? SHOW_IMAGES_IN_EMAIL_DIR : 'thumbnail') . '_images/'
                     );
                     // dont allow cache
                     $smarty->caching = 0;

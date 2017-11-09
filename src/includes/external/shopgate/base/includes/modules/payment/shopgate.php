@@ -106,7 +106,7 @@ class shopgate
 
     public function check()
     {
-        if (!isset ($this->_check)) {
+        if (!isset($this->_check)) {
             $check_query  = xtc_db_query(
                 "select configuration_value from " . TABLE_CONFIGURATION
                 . " where configuration_key = 'MODULE_PAYMENT_SHOPGATE_STATUS'"
