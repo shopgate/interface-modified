@@ -162,8 +162,7 @@ function shopgate_php_mail(
         $mail->IsMail();
     }
 
-    if (EMAIL_USE_HTML == 'true') // set email format to HTML
-    {
+    if (EMAIL_USE_HTML == 'true') { // set email format to HTML
         $mail->IsHTML(true);
         $mail->Body = $message_body_html
             . $html_signatur;//DPW Signatur erg�nzt.

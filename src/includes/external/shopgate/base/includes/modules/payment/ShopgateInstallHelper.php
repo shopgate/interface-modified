@@ -126,7 +126,6 @@ class ShopgateInstallHelper
             if (is_array($result)) {
                 return (count($result) > 1) ? $result[1] : $result[0];
             }
-
         }
 
         $keyQuery

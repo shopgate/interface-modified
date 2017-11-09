@@ -146,7 +146,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $customerData,
             $customField->prepareCustomFields(clone $customer, TABLE_CUSTOMERS)
         );
-
         xtc_db_perform(TABLE_CUSTOMERS, $customerData);
         $userId = xtc_db_insert_id();
 
@@ -200,7 +199,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 . $address->getCountry()
                 . "'"
             );
-
             $countryResult = xtc_db_fetch_array($countryQuery);
             $addressData   = array(
                 "customers_id"          => $userId,
@@ -223,7 +221,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 clone $address, TABLE_ADDRESS_BOOK
             )
             );
-
             xtc_db_perform(TABLE_ADDRESS_BOOK, $addressData);
             if ($defaultAddress) {
                 $addressId = xtc_db_insert_id();
@@ -1114,7 +1111,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $qry = xtc_db_query(
             "SELECT directory as dir FROM languages as l WHERE l.languages_id = {$this->languageId};"
         );
-
         $languageDirectory = 'german';
         while ($row = xtc_db_fetch_array($qry)) {
             $languageDirectory = $row['dir'];
@@ -1211,7 +1207,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $this->log(
             'db: save, id: ' . $dbOrderId, ShopgateLogger::LOGTYPE_DEBUG
         );
-
         $ordersShopgateOrder = array(
             "orders_id"                        => $dbOrderId,
             "shopgate_order_number"            => $order->getOrderNumber(),
@@ -1233,7 +1228,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $this->insertStatusHistory(
             $order, $dbOrderId, $orderData['orders_status']
         );
-
         $this->log(
             'method: _setOrderPayment() ', ShopgateLogger::LOGTYPE_DEBUG
         );
@@ -1245,7 +1239,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $this->insertOrderItems(
             $order, $dbOrderId, $orderData['orders_status'], $couponModel
         );
-
         $this->log(
             'method: _insertOrderTotal() ', ShopgateLogger::LOGTYPE_DEBUG
         );
@@ -1268,7 +1261,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         xtc_db_perform(
             TABLE_ORDERS, $orderUpdateData, "update", "orders_id = {$dbOrderId}"
         );
-
         $this->log(
             'method: _pushOrderToAfterbuy', ShopgateLogger::LOGTYPE_DEBUG
         );
@@ -1395,7 +1387,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     TABLE_ORDERS, $orderData, "update",
                     "orders_id = {$dbOrder['orders_id']}"
                 );
-
             }
 
             // update paymentinfos
@@ -1576,7 +1567,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     TABLE_SHOPGATE_ORDERS, $ordersShopgateOrder, "update",
                     "shopgate_order_id = {$dbOrder['shopgate_order_id']}"
                 );
-
                 // Save status in order
                 $orderData                  = array();
                 $orderData["orders_status"] = $status;
@@ -1964,7 +1954,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $orderItemTaxRate    = xtc_get_tax_rate(
                 $orderItemTaxClassId, $this->countryId, $this->zoneId
             );
-
             $sgCartItem->setOptions(
                 $itemModel->getOptionsToProduct(
                     $id, $sgOrderInfo, $orderItemTaxRate
@@ -1973,7 +1962,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $sgCartItem->setAttributes(
                 $itemModel->getAttributesToProduct($orderItem)
             );
-
             // not supported
             $sgCartItem->setInputs(array());
             $result[] = $sgCartItem;
@@ -1992,7 +1980,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $maxOrder = $model->getCategoryMaxOrder(
             $this->config->getReverseCategoriesSortOrder()
         );
-
         $this->buildCategoriesTree(0, $maxOrder, 'xml', $limit, $offset, $uids);
 
         if ($this->config->getExportNewProductsCategory()) {
@@ -2075,7 +2062,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $result = ShopgateWrapper::db_query(
             $itemXmlModel->getProductQuery($uids)
         );
-
         while ($item = ShopgateWrapper::db_fetch_array($result)) {
             $actualXmlModel = clone $itemXmlModel;
             $actualXmlModel->setItem($item);
@@ -2279,7 +2265,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             "/order_total/ot_shipping.php",
             "/shipping.php"
         );
-
         foreach ($neededFilesFromShopSystem as $file) {
             if (file_exists(rtrim(DIR_WS_CLASSES, "/") . $file)) {
                 include_once(rtrim(DIR_WS_CLASSES, "/") . $file);
@@ -2561,7 +2546,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             $orderItemTaxRate    = xtc_get_tax_rate(
                 $orderItemTaxClassId, $this->countryId, $this->zoneId
             );
-
             //price
             $xtcPrice     = new xtcPrice(
                 $this->currency["code"], $customerGroupId
@@ -2712,7 +2696,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             "Start buldiding Categories tree: parent_id = " . $parentId . "...",
             ShopgateLogger::LOGTYPE_DEBUG
         );
-
         $qry
             = "
         SELECT DISTINCT
@@ -2739,7 +2722,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         $qry = xtc_db_query($qry);
 
         while ($item = xtc_db_fetch_array($qry)) {
-
             $this->log(
                 "cheking if category is blacklisted ...",
                 ShopgateLogger::LOGTYPE_DEBUG
@@ -4247,7 +4229,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                                        = ShopgateCustomerOrderModel::TOTAL_CLASS_PAYMENT;
             $ordersTotal["sort_order"] = ++$shippingSortOrder;
             xtc_db_perform(TABLE_ORDERS_TOTAL, $ordersTotal);
-
         }
 
         $this->log(
@@ -4966,7 +4947,6 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                                           . $paypal_link['text']
                     );
                     $_SESSION['paypal_link'] = $paypal_link['checkout'];
-
                 }
                 //EOF  - web28 - 2010-03-27 PayPal Bezahl-Link
                 // PAYMENT MODUL TEXTS

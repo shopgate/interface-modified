@@ -431,7 +431,6 @@ class ShopgateItemXmlModel extends ShopgateItemModel
                 $input->setLabel($firstItem['products_options_name']);
                 ++$attributeCount;
                 foreach ($variationGroup as $variation) {
-
                     $price = $variation['price_prefix'] == "-"
                         ? $priceHelper->formatPriceNumber(
                             $variation['options_values_price'] * (-1), 2
@@ -580,7 +579,6 @@ class ShopgateItemXmlModel extends ShopgateItemModel
             <= $this->config->getMaxAttributes()
             && $this->getIsChild()
         ) {
-
             $inputFields     = array();
             $parentAttGroups = $this->parent != null
                 ? $this->parent->getAttributeGroups()
@@ -771,7 +769,6 @@ class ShopgateItemXmlModel extends ShopgateItemModel
             );
 
             while ($quantity = xtc_db_fetch_array($quantitiesQuery)) {
-
                 $addAmount      = $this->calculateVariationsAddAmount($xtPrice);
                 $graduatedPrice = $xtPrice->xtcGetPrice(
                     $this->item['products_id'],
@@ -812,7 +809,6 @@ class ShopgateItemXmlModel extends ShopgateItemModel
             }
 
             if ($xtPrice->cStatus['customers_status_ot_discount'] > 0) {
-
                 $discount       = $xtPrice->xtcGetDC(
                     $priceModel->getSalePrice(),
                     $xtPrice->cStatus['customers_status_ot_discount']
@@ -830,7 +826,6 @@ class ShopgateItemXmlModel extends ShopgateItemModel
                 ); // tier prices are always aggregated in
                 $tierPriceModel->setCustomerGroupUid($customerGroupId);
                 $priceModel->addTierPriceGroup($tierPriceModel);
-
             }
         }
     }

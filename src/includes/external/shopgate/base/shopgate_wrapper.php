@@ -48,7 +48,6 @@ class ShopgateWrapper
     public static function db_fetch_array($db_query)
     {
         return xtc_db_fetch_array($db_query);
-
     }
 
     /**

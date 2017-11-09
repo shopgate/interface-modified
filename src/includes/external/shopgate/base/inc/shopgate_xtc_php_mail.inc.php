@@ -21,7 +21,6 @@ function shopgate_php_mail($from_email_address, $from_email_name,
     $path_to_attachments, $path_to_more_attachments,
     $email_subject, $message_body_html, $message_body_plain
 ) {
-
     global $mail_error;
 
     //  require_once(DIR_WS_INCLUDES . "classes/order.php");
@@ -191,7 +190,6 @@ function shopgate_php_mail($from_email_address, $from_email_name,
     $mail->Subject = $email_subject;
 
     return (!$mail->Send()) ? false : true;
-
 }
 /*
 function _attachments_array($path_to_attachments,$path_to_more_attachments)

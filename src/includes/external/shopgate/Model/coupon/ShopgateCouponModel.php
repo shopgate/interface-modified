@@ -98,7 +98,6 @@ class ShopgateCouponModel extends ShopgateObject
     ) {
         $msg = "";
         if ($coupon['coupon_type'] != self::SG_COUPON_TYPE_GIFT) {
-
             if (empty($coupon)
                 || $coupon['coupon_active'] !== self::SG_COUPON_ACTIVE
             ) {
@@ -262,7 +261,7 @@ class ShopgateCouponModel extends ShopgateObject
             case self::SG_COUPON_TYPE_FREE_SHIPPING:
                 $freeShipping = true;
             // for free shipping coupons, if an amount was provided it's always handled as if fixed, so fall through:
-
+            // no break
             case self::SG_COUPON_TYPE_FIX:
                 $couponAmount = empty($applicableProducts)
                     ? 0
