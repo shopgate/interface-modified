@@ -451,7 +451,7 @@ if (defined('PROJECT_MAJOR_VERSION')) {
                    onclick="sgToggleSettings(this)"
                    id="sg_global_switch" <?php if (!empty($sgUseGlobalConfig)) {
                      echo 'checked="checked"';
-               } ?> />
+                 } ?> />
             <label for="sg_global_switch"><?php echo SHOPGATE_CONFIG_USE_GLOBAL_CONFIG; ?></label>
         <?php endif; ?>
     <?php endif; ?>
