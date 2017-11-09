@@ -2192,7 +2192,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
             );
         } else {
             while ($row = xtc_db_fetch_array($queryResult)) {
-                foreach ($row AS &$value) {
+                foreach ($row as &$value) {
                     $value = utf8_encode($value);
                 }
                 array_push($result, $row);
@@ -2241,7 +2241,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
 
         $taxRates = array();
         while ($row = xtc_db_fetch_array($result)) {
-            foreach ($row AS &$value) {
+            foreach ($row as &$value) {
                 $value = utf8_encode($value);
             }
             $taxRates[] = $row;
@@ -2439,9 +2439,9 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
 
         $quotes             = $shipping_modules->quote();
         $unsupportedModules = array("United States Postal Service");
-        foreach ($quotes AS $shippingModule) {
+        foreach ($quotes as $shippingModule) {
             //we dont support usps as shopgate plugin shipping method, also on error continue
-            foreach ($unsupportedModules AS $moduleName) {
+            foreach ($unsupportedModules as $moduleName) {
                 if (strpos($shippingModule['module'], $moduleName) !== false
                     || !empty($shippingModule['error'])
                 ) {
@@ -2545,7 +2545,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
         );
         $itemModel->setModifiedVersion($this->modifiedVersion);
 
-        foreach ($cart->getItems() AS $orderItem) {
+        foreach ($cart->getItems() as $orderItem) {
             $sgCartItem  = new ShopgateCartItem();
             $sgOrderInfo = $this->jsonDecode(
                 stripslashes($orderItem->getInternalOrderInfo()), true
@@ -3920,7 +3920,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         $result  = xtc_db_query($query);
                         $dlEntry = xtc_db_fetch_array($result);
 
-                        if (isset ($dlEntry['products_attributes_filename'])
+                        if (isset($dlEntry['products_attributes_filename'])
                             && xtc_not_null(
                                 $dlEntry['products_attributes_filename']
                             )
@@ -4621,7 +4621,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 }
                 /** EOF BILLPAY CHANGED **/
                 //BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
-                unset ($_SESSION['paypal_link']);
+                unset($_SESSION['paypal_link']);
                 if ($order->info['payment_method'] == 'paypal_ipn') {
 
                     $paypal_link     = array();
@@ -4951,7 +4951,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                 $smarty->assign('PHONE', $order->customer['telephone']);
 
                 //BOF  - web28 - 2010-03-27 PayPal Bezahl-Link
-                unset ($_SESSION['paypal_link']);
+                unset($_SESSION['paypal_link']);
                 if ($order->info['payment_method'] == 'paypal_ipn') {
 
                     //BOF - web28 - 2010-06-11 - Send Order  by Admin Paypal IPN

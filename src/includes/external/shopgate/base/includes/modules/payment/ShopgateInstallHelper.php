@@ -77,7 +77,7 @@ class ShopgateInstallHelper
     /**
      * C-tor
      */
-    function __construct()
+    public function __construct()
     {
     }
 

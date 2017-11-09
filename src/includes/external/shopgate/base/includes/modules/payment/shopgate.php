@@ -27,9 +27,13 @@ include_once DIR_FS_CATALOG
 
 class shopgate
 {
-    var $code, $title, $description, $enabled, $sort_order;
+    public $code;
+    public $title;
+    public $description;
+    public $enabled;
+    public $sort_order;
 
-    function shopgate()
+    public function shopgate()
     {
         $this->code        = 'shopgate';
         $this->title       = MODULE_PAYMENT_SHOPGATE_TEXT_TITLE;
@@ -39,7 +43,7 @@ class shopgate
         $this->sort_order  = MODULE_PAYMENT_SHOPGATE_SORT_ORDER;
     }
 
-    function mobile_payment()
+    public function mobile_payment()
     {
         $this->code        = 'shopgate';
         $this->title       = MODULE_PAYMENT_SHOPGATE_TEXT_TITLE;
@@ -48,42 +52,42 @@ class shopgate
         $this->sort_order  = MODULE_PAYMENT_SHOPGATE_SORT_ORDER;
     }
 
-    function update_status()
+    public function update_status()
     {
     }
 
-    function javascript_validation()
+    public function javascript_validation()
     {
         return false;
     }
 
-    function selection()
+    public function selection()
     {
         return array('id'          => $this->code, 'module' => $this->title,
                      'description' => $this->info);
     }
 
-    function pre_confirmation_check()
+    public function pre_confirmation_check()
     {
         return false;
     }
 
-    function confirmation()
+    public function confirmation()
     {
         return array('title' => MODULE_PAYMENT_SHOPGATE_TEXT_DESCRIPTION);
     }
 
-    function process_button()
+    public function process_button()
     {
         return false;
     }
 
-    function before_process()
+    public function before_process()
     {
         return false;
     }
 
-    function after_process()
+    public function after_process()
     {
         global $insert_id;
         if ($this->order_status) {
@@ -95,12 +99,12 @@ class shopgate
         }
     }
 
-    function get_error()
+    public function get_error()
     {
         return false;
     }
 
-    function check()
+    public function check()
     {
         if (!isset ($this->_check)) {
             $check_query  = xtc_db_query(
@@ -123,7 +127,7 @@ class shopgate
      * MODULE_PAYMENT_SHOPGATE_ORDER_STATUS_ID - (DEPRECATED) keep it for old
      * installations
      */
-    function install()
+    public function install()
     {
         xtc_db_query(
             "delete from " . TABLE_CONFIGURATION
@@ -164,7 +168,7 @@ class shopgate
     /**
      * remove the shopgate module
      */
-    function remove()
+    public function remove()
     {
         // MODULE_PAYMENT_SHOPGATE_ORDER_STATUS_ID - Keep this on removing for old installation
         xtc_db_query(
@@ -178,7 +182,7 @@ class shopgate
      *
      * @return multitype:
      */
-    function keys()
+    public function keys()
     {
         return array('MODULE_PAYMENT_SHOPGATE_STATUS',
                      'MODULE_PAYMENT_SHOPGATE_SORT_ORDER');

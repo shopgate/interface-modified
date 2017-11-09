@@ -418,7 +418,8 @@ if (defined('PROJECT_MAJOR_VERSION')) {
         <br/>                            <?php if ($sg_language === null): ?>
             <?php if (!empty($shopgate_info)): ?>
 
-                <div class="shopgate_blue_message"><strong style="color: blue;">Info:</strong> <?php echo $shopgate_info; ?>
+                <div class="shopgate_blue_message"><strong
+                            style="color: blue;">Info:</strong> <?php echo $shopgate_info; ?>
                 </div>
                 <br/>
             <?php endif; ?>

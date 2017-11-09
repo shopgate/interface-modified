@@ -59,7 +59,7 @@ class ShopgateItemCartModel extends ShopgateObject
         $optionIdArray = array();
         $options       = $product->getOptions();
         if (!empty($options)) {
-            foreach ($options AS $option) {
+            foreach ($options as $option) {
                 $optionIdArray[] = $option->getValueNumber();
             }
         }
@@ -85,7 +85,7 @@ class ShopgateItemCartModel extends ShopgateObject
 
         foreach ($orderInfos as $info) {
             if (is_array($info)) {
-                foreach ($info AS $key => $value) {
+                foreach ($info as $key => $value) {
                     $attributeIdArray[] = $key;
                 }
             }

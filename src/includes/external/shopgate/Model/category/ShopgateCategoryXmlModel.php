@@ -23,7 +23,6 @@
  */
 class ShopgateCategoryXmlModel extends ShopgateCategoryModel
 {
-
     public function setUid()
     {
         parent::setUid($this->item['category_number']);

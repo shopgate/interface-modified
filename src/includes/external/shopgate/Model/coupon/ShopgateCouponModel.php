@@ -281,7 +281,7 @@ class ShopgateCouponModel extends ShopgateObject
             // Nothing to do here. The coupon will be marked as "accepted" by modified but there is
             // no price reduction
             case self::SG_COUPON_TYPE_GIFT:
-            default :
+            default:
                 break;
         }
 
@@ -579,7 +579,7 @@ class ShopgateCouponModel extends ShopgateObject
         ShopgateItemCartModel $cartItemModel
     ) {
         $categoryIds = explode(",", $coupon['restrict_to_categories']);
-        foreach ($items AS $item) {
+        foreach ($items as $item) {
             $categoryPath            = xtc_get_product_path(
                 xtc_get_prid($item->getItemNumber())
             );

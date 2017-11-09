@@ -62,7 +62,7 @@ class ShopgateCustomerModel extends ShopgateObject
                     WHERE cs.language_id = {$this->languageId}";
         $result = xtc_db_query($query);
         while ($customerGroup = xtc_db_fetch_array($result)) {
-            foreach ($customerGroup AS &$cgrp) {
+            foreach ($customerGroup as &$cgrp) {
                 $this->stringToUtf8($cgrp, $this->config->getEncoding());
             }
             if ($customerGroup['id'] == DEFAULT_CUSTOMERS_STATUS_ID_GUEST) {
