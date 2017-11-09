@@ -25,7 +25,6 @@ $shopgateMobileHeader = '';
 $shopgateJsHeader     = '';
 
 if (MODULE_PAYMENT_SHOPGATE_STATUS == 'True') {
-
     include_once DIR_FS_CATALOG
         . 'includes/external/shopgate/shopgate_library/shopgate.php';
     include_once DIR_FS_CATALOG
@@ -85,7 +84,6 @@ if (MODULE_PAYMENT_SHOPGATE_STATUS == 'True') {
                     $shopgateJsHeader = $shopgateRedirector->buildScriptShop();
                 }
             } elseif (!empty($search_keywords) && is_array($search_keywords)) {
-
                 $invalidSearchPattern = array(
                     'and',
                     'or',
@@ -100,7 +98,6 @@ if (MODULE_PAYMENT_SHOPGATE_STATUS == 'True') {
                 $shopgateJsHeader = $shopgateRedirector->buildScriptSearch(
                     implode(' ', $search_keywords)
                 );
-
             } else {
                 $shopgateJsHeader = $shopgateRedirector->buildScriptDefault();
             }

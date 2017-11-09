@@ -34,7 +34,6 @@ define('TABLE_CUSTOMERS_SHOPGATE_CUSTOMER', 'customers_shopgate_customer');
 
 class ShopgateConfigModified extends ShopgateConfig
 {
-
     protected $redirect_languages;
 
     protected $shipping;

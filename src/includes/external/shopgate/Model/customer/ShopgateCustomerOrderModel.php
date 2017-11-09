@@ -26,7 +26,6 @@
  */
 class ShopgateCustomerOrderModel
 {
-
     const TOTAL_CLASS_BILLSAFE              = 'ot_billsafe';
     const TOTAL_CLASS_COD_FEE               = 'ot_cod_fee';
     const TOTAL_CLASS_COUPON                = 'ot_coupon';

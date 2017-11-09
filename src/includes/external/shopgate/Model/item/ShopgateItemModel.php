@@ -304,7 +304,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      * @param $minOrder int minimum order index
      * @param $addToOrderIndex
      */
-    public function getProductOrderValues(&$maxOrder, &$minOrder,
+    public function getProductOrderValues(
+        &$maxOrder, &$minOrder,
         &$addToOrderIndex
     ) {
         $this->log(
@@ -392,7 +393,6 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
         $attributes   = $item->getAttributes();
         $dbAttributes = array();
         foreach ($attributes as $attribute) {
-
             $query
                 = "SELECT
                             po.products_options_name AS `name`,
@@ -510,7 +510,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      * @param string $customerGroupMaxPriceDiscount
      * @param string $customerGroupDiscountAttributes
      */
-    public function getDiscountToCustomerGroups(&$customerGroupMaxPriceDiscount,
+    public function getDiscountToCustomerGroups(
+        &$customerGroupMaxPriceDiscount,
         &$customerGroupDiscountAttributes
     ) {
         if ($queryResult = $this->getCustomerGroups()) {
@@ -544,7 +545,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      * @throws ShopgateLibraryException
      * @return array
      */
-    public function getCategoryReducementMap($maxDepth = null, $parentId = null,
+    public function getCategoryReducementMap(
+        $maxDepth = null, $parentId = null,
         $copyId = null, $depth = null
     ) {
         $this->log(
@@ -624,9 +626,9 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
         //logic taken from file products_new.php in dir /
         $date_new_products = date(
             "Y-m-d", mktime(
-                1, 1, 1, date("m"), date("d") - MAX_DISPLAY_NEW_PRODUCTS_DAYS,
-                date("Y")
-            )
+                       1, 1, 1, date("m"), date("d") - MAX_DISPLAY_NEW_PRODUCTS_DAYS,
+                       date("Y")
+                   )
         );
         $days              = " and p.products_date_added > '"
             . $date_new_products . "' ";
@@ -721,7 +723,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      *
      * @return string|void
      */
-    private function getAttributeQuery($productId, $type,
+    private function getAttributeQuery(
+        $productId, $type,
         $optionsAsInputFields = ''
     ) {
         $optionsAsInputFields = trim($optionsAsInputFields, ',');
@@ -799,7 +802,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      *
      * @return string|void
      */
-    public function getAttributesToProductQuery($productId,
+    public function getAttributesToProductQuery(
+        $productId,
         $optionsAsInputFields = ''
     ) {
         return $this->getAttributeQuery(
@@ -819,7 +823,8 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
      *
      * @return string|void
      */
-    public function getAttributesInputFieldsToProductsQuery($productId,
+    public function getAttributesInputFieldsToProductsQuery(
+        $productId,
         $optionsAsInputFields = ''
     ) {
         return $this->getAttributeQuery(
@@ -993,7 +998,6 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
             $price    = $item["specials_new_products_price"];
 
             $orderInfos['is_special_price'] = 1;
-
         } elseif (!empty($customerGroupMaxPriceDiscount)
             && round(
                 $customerGroupMaxPriceDiscount, 2
@@ -1122,8 +1126,10 @@ class ShopgateItemModel extends Shopgate_Model_Catalog_Product
         if (!empty($product["products_fsk18"])
             && $product["products_fsk18"] == 1
         ) {
-            $properties[] = $asArray ? array("label" => "Altersbeschränkung",
-                                             "value" => "18 Jahre")
+            $properties[] = $asArray ? array(
+                "label" => "Altersbeschränkung",
+                "value" => "18 Jahre"
+            )
                 : "Altersbeschränkung=>18 Jahre";
         }
 

@@ -109,7 +109,7 @@ function shopgate_php_mail($from_email_address, $from_email_name,
     $mail            = new PHPMailer();
     $mail->PluginDir = DIR_FS_DOCUMENT_ROOT . 'includes/classes/';
 
-    if (isset ($_SESSION['language_charset'])) {
+    if (isset($_SESSION['language_charset'])) {
         $mail->CharSet = $_SESSION['language_charset'];
         $mail->SetLanguage($_SESSION['language_code'], DIR_WS_CLASSES);
         $charset

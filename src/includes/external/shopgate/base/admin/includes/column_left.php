@@ -88,7 +88,4 @@ if (MODULE_PAYMENT_SHOPGATE_STATUS == 'True'
         $surroundingTags['end'] .
         $surroundingHtml['end']
     );
-
 }
-
-
