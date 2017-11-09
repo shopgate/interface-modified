@@ -1,0 +1,10 @@
+/shopgate-modified-integration.zip
+/.buildpath
+/.project
+/nbproject
+/modified.zip
+/.settings
+/.idea/*
+.DS_Store
+/release/package
+src/includes/external/shopgate/vendor
