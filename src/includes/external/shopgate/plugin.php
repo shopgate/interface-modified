@@ -4719,7 +4719,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         $html_mail, $txt_mail
                     )
                     ) {
-						$this->log('failed to send email (old) to customer.');
+                        $this->log('failed to send email (old) to customer.');
                     }
                     //BOF - Dokuman - 2009-10-17 - Send emails to customer only, when set to "true" in admin panel
                 }
