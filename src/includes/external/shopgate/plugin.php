@@ -4699,11 +4699,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     $html_mail, $txt_mail
                 )
                 ) {
-                    throw new ShopgateLibraryException(
-                        ShopgateLibraryException::PLUGIN_EMAIL_SEND_ERROR,
-                        "Error while sending order confirmation mail to admin",
-                        true
-                    );
+                    $this->log('failed to send email (old) to admin.');
                 }
                 //EOF Dokuman - 2009-08-19 - BUGFIX: #0000227 customers surname in reply address in orders mail to admin
 
@@ -4723,11 +4719,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         $html_mail, $txt_mail
                     )
                     ) {
-                        throw new ShopgateLibraryException(
-                            ShopgateLibraryException::PLUGIN_EMAIL_SEND_ERROR,
-                            "Error while sending order confirmation mail to customer",
-                            true
-                        );
+                        $this->log('failed to send email (old) to customer.');
                     }
                     //BOF - Dokuman - 2009-10-17 - Send emails to customer only, when set to "true" in admin panel
                 }
@@ -5065,10 +5057,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                     $txt_mail
                 )
                 ) {
-                    throw new ShopgateLibraryException(
-                        ShopgateLibraryException::PLUGIN_EMAIL_SEND_ERROR,
-                        "Error while sending order confirmation mail to admin"
-                    );
+                    $this->log('failed to send email (new) to admin.');
                 }
                 // send mail to customer
                 if (SEND_EMAILS == 'true' || $send_by_admin) {
@@ -5088,10 +5077,7 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         $txt_mail
                     )
                     ) {
-                        throw new ShopgateLibraryException(
-                            ShopgateLibraryException::PLUGIN_EMAIL_SEND_ERROR,
-                            "Error while sending order confirmation mail to customer"
-                        );
+                        $this->log('failed to send email (new) to customer.');
                     }
                 }
 

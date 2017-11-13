@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 ### Changed
 - set this plugin to use shopgate/cart-integration-sdk version 2.9.70 up from 2.9.69.
+- if the confirmation email can't be sent, an error is logged now, instead of letting the whole order import fail
 
 ## 2.9.40 - 2017-11-9
 ### Changed
