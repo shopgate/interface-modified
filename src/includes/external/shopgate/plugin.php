@@ -21,7 +21,7 @@
  *
  */
 
-define("SHOPGATE_PLUGIN_VERSION", "2.9.40");
+define("SHOPGATE_PLUGIN_VERSION", "2.9.41");
 
 /**
  * Modified eCommerce Plugin for Shopgate
