@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 ### Changed
-- fix category include path
+- fix cart-integration-sdk include path
 
 ## 2.9.41 - 2017-11-22
 ### Changed
