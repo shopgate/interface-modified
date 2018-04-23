@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Changed
+- fix cart-integration-sdk include path
+
 ## 2.9.41 - 2017-11-22
 ### Changed
 - set this plugin to use shopgate/cart-integration-sdk version 2.9.70 up from 2.9.69.
