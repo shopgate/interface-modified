@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+## 2.9.42 - 2018-05-16
 ### Changed
 - fix cart-integration-sdk include path
 
@@ -460,6 +461,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - supports remote cron jobs via Shopgate Plugin API
 - remote cron job for synchronization of order status at Shopgate
 
-[Unreleased]: https://github.com/shopgate/cart-integration-modified/compare/2.9.41...HEAD
+[Unreleased]: https://github.com/shopgate/cart-integration-modified/compare/2.9.42...HEAD
+[2.9.42]: https://github.com/shopgate/cart-integration-modified/compare/2.9.41...2.9.42
 [2.9.41]: https://github.com/shopgate/cart-integration-modified/compare/2.9.40...2.9.41
 [2.9.40]: https://github.com/shopgate/cart-integration-modified/compare/2.9.39...2.9.40
