@@ -1,6 +1,6 @@
 {
-  "name": "shopgate/cart-integration-shopware",
-  "description": "Integrates the Shopware shopping cart solution with Shopgate",
+  "name": "shopgate/cart-integration-modified",
+  "description": "Integrates the modified shopping cart solution with Shopgate",
   "homepage": "https://github.com/shopgate/cart-integration-xtcmodified",
   "license": "Apache-2.0",
   "config": {
