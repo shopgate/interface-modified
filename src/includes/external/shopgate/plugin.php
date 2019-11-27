@@ -4927,18 +4927,17 @@ class ShopgateModifiedPlugin extends ShopgatePlugin
                         include(DIR_FS_LANGUAGES . $order->info['language']
                             . '/modules/payment/paypal_ipn.php');
                         $payment_modules = new paypal_ipn;
+                        $paypal_link = array();
+                        $payment_modules->create_paypal_link();
+
+                        $smarty->assign('PAYMENT_INFO_HTML', $paypal_link['html']);
+                        $smarty->assign(
+                            'PAYMENT_INFO_TXT', MODULE_PAYMENT_PAYPAL_IPN_TXT_EMAIL
+                            . $paypal_link['text']
+                        );
+                        $_SESSION['paypal_link'] = $paypal_link['checkout'];
                     }
                     //EOF - web28 - 2010-06-11 - Send Order  by Admin Paypal IPN
-
-                    $paypal_link = array();
-                    $payment_modules->create_paypal_link();
-
-                    $smarty->assign('PAYMENT_INFO_HTML', $paypal_link['html']);
-                    $smarty->assign(
-                        'PAYMENT_INFO_TXT', MODULE_PAYMENT_PAYPAL_IPN_TXT_EMAIL
-                                          . $paypal_link['text']
-                    );
-                    $_SESSION['paypal_link'] = $paypal_link['checkout'];
                 }
                 //EOF  - web28 - 2010-03-27 PayPal Bezahl-Link
                 // PAYMENT MODUL TEXTS
